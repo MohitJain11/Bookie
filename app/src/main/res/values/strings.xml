@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">B3</string>
+    <string name="hindi">Hindi</string>
+    <string name="english">English</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mohit.b3;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     EditText et_user_email, et_user_password;
     Button btn_signUp;
@@ -30,6 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         et_user_email = findViewById(R.id.et_user_email);
         et_user_password = findViewById(R.id.et_user_password);
         btn_signUp = findViewById(R.id.btn_signUp);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 //        @Override
 //        public void onStart() {
 //            super.onStart();
@@ -96,4 +106,25 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
+//    public void uploadUserPic(){
+//        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+//        StorageReference riversRef = mStorageRef.child("images/rivers.jpg");
+//
+//        riversRef.putFile(file)
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        // Get a URL to the uploaded content
+//                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception exception) {
+//                        // Handle unsuccessful uploads
+//                        // ...
+//                    }
+//                });
+//    }
 }

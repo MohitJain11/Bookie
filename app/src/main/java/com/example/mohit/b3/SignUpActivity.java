@@ -3,6 +3,7 @@ package com.example.mohit.b3;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -45,7 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    private ProgressDialog progressDialog;
     private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     private String Language="English";
@@ -73,6 +74,8 @@ public class SignUpActivity extends AppCompatActivity {
         radio_hindi=findViewById(R.id.radio_hindi);
         radio_english=findViewById(R.id.radio_english);
         radio_english.setChecked(true);
+        progressDialog=new ProgressDialog(SignUpActivity.this);
+        progressDialog.setMessage("Loading");
         btn_signUp = findViewById(R.id.btn_signUp);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 //        @Override
@@ -108,6 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String validContactNumber = "[0-9]{10,11}";
                 String validEmail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
 
                         "\\@" +
@@ -130,6 +134,12 @@ public class SignUpActivity extends AppCompatActivity {
                     input_contact_number.setError("Enter Contact Number");
                     return;
                 }
+                if(!input_contact_number.getText().toString().matches(validContactNumber))
+                {
+                    input_contact_number.setError("Enter Valid Contact Number");
+                    return;
+
+                }
                 if(TextUtils.isEmpty(input_address.getText().toString())) {
                     input_address.setError("Enter Address");
                     return;
@@ -139,23 +149,28 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 if(TextUtils.isEmpty(input_user_email.getText().toString())) {
-                    input_name.setError("Enter Email Id");
+                    input_user_email.setError("Enter Email Id");
                     return;
                 }
-                Matcher matcher = Pattern.compile(validEmail).matcher(input_user_email.getText());
-                if(matcher.matches()) {
-                    input_name.setError("Enter Valid Email Id");
-                    return;
-                }
-                if(TextUtils.isEmpty(input_user_email.getText().toString())) {
-                    input_name.setError("Enter Email Id");
+                Matcher matcher= Pattern.compile(validEmail).matcher(input_user_email.getText().toString());
+                if(!matcher.matches()) {
+                    input_user_email.setError("Enter Valid Email Id");
                     return;
                 }
                 if(TextUtils.isEmpty(input_user_password.getText().toString())) {
                     input_user_password.setError("Enter Password");
                     return;
                 }
-                
+                if(input_user_password.getText().toString().length()<6)
+                {
+                    input_user_password.setError("Password Should Be More Then 6 Characters");
+                    return;
+                }
+                if(bitmap==null)
+                {
+                    Toast.makeText(SignUpActivity.this, "Select Profile Picture", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 signUpNewUser();
             }
         });
@@ -163,6 +178,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signUpNewUser() {
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(input_user_email.getText().toString(), input_user_password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -176,6 +192,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
+                            progressDialog.dismiss();
                         }
 
                         // ...
@@ -206,11 +223,13 @@ public class SignUpActivity extends AppCompatActivity {
                     call.enqueue(new Callback<UserSignUp>() {
                         @Override
                         public void onResponse(Call<UserSignUp> call, Response<UserSignUp> response) {
-                            Toast.makeText(SignUpActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
 
                         @Override
                         public void onFailure(Call<UserSignUp> call, Throwable t) {
+                            progressDialog.dismiss();
 
                         }
                     });
@@ -218,27 +237,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-        /*riversRef.putFile(file)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("SignUp", "createUserWithEmail:success");
-                        Toast.makeText(SignUpActivity.this, "Sign Up successfully!.",
-                                Toast.LENGTH_SHORT).show();
-
-
-                    }})
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                        Toast.makeText(SignUpActivity.this, exception.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-*/
     }
     private void selectImage() {
         final CharSequence[] items = {"CAMERA", "GALLERY", "CANCEL"};

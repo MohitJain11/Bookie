@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,9 +25,8 @@ import android.widget.Toast;
 
 import com.example.mohit.b3.POJOS.UserSignUp;
 import com.example.mohit.b3.Retrofit.RetrofitClient;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -106,6 +108,54 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String validEmail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+
+                        "\\@" +
+
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+
+                        "(" +
+
+                        "\\." +
+
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+
+                        ")+";
+
+                if(TextUtils.isEmpty(input_name.getText().toString())) {
+                    input_name.setError("Enter Name");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_contact_number.getText().toString())) {
+                    input_contact_number.setError("Enter Contact Number");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_address.getText().toString())) {
+                    input_address.setError("Enter Address");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_city.getText().toString())) {
+                    input_city.setError("Enter City");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_user_email.getText().toString())) {
+                    input_name.setError("Enter Email Id");
+                    return;
+                }
+                Matcher matcher = Pattern.compile(validEmail).matcher(input_user_email.getText());
+                if(matcher.matches()) {
+                    input_name.setError("Enter Valid Email Id");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_user_email.getText().toString())) {
+                    input_name.setError("Enter Email Id");
+                    return;
+                }
+                if(TextUtils.isEmpty(input_user_password.getText().toString())) {
+                    input_user_password.setError("Enter Password");
+                    return;
+                }
+                
                 signUpNewUser();
             }
         });
@@ -135,8 +185,40 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void sendUserData(final String id)
     {
+
         final StorageReference riversRef = mStorageRef.child("user/profilePic.jpg");
-        riversRef.putFile(file)
+        riversRef.putFile(file).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()){
+                    throw task.getException();
+                }
+                return riversRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()){
+                    Uri downUri = task.getResult();
+                    //Log.d(TAG, "onComplete: Url: "+ downUri.toString());
+                    Call<UserSignUp> call = RetrofitClient.getApi().RegisterUser(id, input_name.getText().toString(),
+                            input_contact_number.getText().toString(), input_address.getText().toString(), "Udaipur", downUri.toString(), Language);
+                    call.enqueue(new Callback<UserSignUp>() {
+                        @Override
+                        public void onResponse(Call<UserSignUp> call, Response<UserSignUp> response) {
+                            Toast.makeText(SignUpActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserSignUp> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+            }
+        });
+        /*riversRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -145,19 +227,6 @@ public class SignUpActivity extends AppCompatActivity {
                         Toast.makeText(SignUpActivity.this, "Sign Up successfully!.",
                                 Toast.LENGTH_SHORT).show();
 
-                        Call<UserSignUp> call = RetrofitClient.getApi().RegisterUser(id, input_name.getText().toString(),
-                                input_contact_number.getText().toString(), input_address.getText().toString(), "Udaipur", riversRef.getDownloadUrl().toString(), Language);
-                            call.enqueue(new Callback<UserSignUp>() {
-                                @Override
-                                public void onResponse(Call<UserSignUp> call, Response<UserSignUp> response) {
-                                    Toast.makeText(SignUpActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onFailure(Call<UserSignUp> call, Throwable t) {
-
-                                }
-                            });
 
                     }})
                 .addOnFailureListener(new OnFailureListener() {
@@ -169,7 +238,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
 
-
+*/
     }
     private void selectImage() {
         final CharSequence[] items = {"CAMERA", "GALLERY", "CANCEL"};

@@ -12,6 +12,18 @@ public class UserSignUp {
     @SerializedName("totalCoins")
     @Expose
     private Integer totalCoins;
+    @SerializedName("userAuthId")
+    @Expose
+    private String userAuthId;
+
+    public void setUserAuthId(String userAuthId) {
+        this.userAuthId = userAuthId;
+    }
+
+    public String getUserAuthId() {
+
+        return userAuthId;
+    }
 
     public Boolean getStatus() {
         return status;

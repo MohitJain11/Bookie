@@ -1,5 +1,6 @@
 package com.example.mohit.b3.Retrofit;
 
+import com.example.mohit.b3.POJOS.GetUserInfo;
 import com.example.mohit.b3.POJOS.UserSignUp;
 
 import retrofit2.Call;
@@ -21,5 +22,9 @@ public interface Api {
 
     );
 
+    @FormUrlEncoded
+    @POST("getUserInfo")
+    Call<GetUserInfo> GetUserInfo(@Field("userAuthId") String userAuthId
+    );
 
 }

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--Header Layout-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_profile_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20sp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:id="@+id/tv_user_name"
+                    android:gravity="center_horizontal"
+                    android:text="Mohit Choudhary"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_total_coin"
+                            android:gravity="center_horizontal"
+                            android:text="100"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Total Coins" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:id="@+id/tv_book_buyed"
+                            android:text="150"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Book Buyed" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:id="@+id/tv_book_sell"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="100"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Book Selled" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGray"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="5sp"
+                    android:paddingBottom="5sp"
+                    android:text="Profile"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!--Name-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/icon_user"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingLeft="15sp"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:src="@drawable/icon_user_name"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight=".8"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:paddingLeft="5sp"
+                        android:paddingTop="10sp"
+                        android:id="@+id/tv_user_name_edit"
+                        android:paddingBottom="10sp"
+                        android:text="Mohit Choudhary"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/icon_edit_name"
+                        android:layout_width="0dp"
+                        android:src="@drawable/icon_edit"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorDrakGray" />
+
+                <!--Email-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/icon_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingLeft="15sp"
+                        android:src="@drawable/icon_email"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:paddingLeft="5sp"
+                        android:paddingTop="10sp"
+                        android:id="@+id/tv_user_email"
+                        android:paddingBottom="10sp"
+                        android:text="choudharymohit1109@gmail.com"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/icon_edit_mail"
+                        android:src="@drawable/icon_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorDrakGray" />
+
+                <!--Mobile Number-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:src="@drawable/icon_phone"
+                        android:id="@+id/icon_mobile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingLeft="15sp"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:paddingLeft="5sp"
+                        android:id="@+id/tv_user_mobile"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="9649359722"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/icon_edit_mobile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:src="@drawable/icon_edit"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGray"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="5sp"
+                    android:paddingBottom="5sp"
+                    android:text="Other Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!--address-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:src="@drawable/icon_address"
+                        android:id="@+id/icon_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingLeft="15sp"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:paddingLeft="5sp"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:id="@+id/tv_user_address"
+                        android:text="21, Matta street shree nath marg"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/icon_edit_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:src="@drawable/icon_edit"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorDrakGray" />
+
+                <!--city-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/icon_city"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight=".1"-->
+                        <!--android:paddingLeft="15sp"-->
+                        <!--android:paddingTop="10sp"-->
+                        <!---->
+                        <!--android:paddingBottom="10sp"-->
+                        <!--android:text="@string/fa_users"-->
+                        <!--android:textSize="18sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight=".8"-->
+                        <!--android:paddingLeft="15sp"-->
+                        <!--android:paddingTop="10sp"-->
+                        <!--android:paddingBottom="10sp"-->
+                        <!--android:text="Udaipur"-->
+                        <!--android:textSize="18sp" />-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/icon_edit_city"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight=".1"-->
+                        <!--android:paddingLeft="15sp"-->
+                        <!--android:src="@drawable/icon_edit"-->
+                        <!--android:paddingTop="10sp"-->
+                        <!--android:paddingBottom="10sp"-->
+                        <!--android:text="@string/fa_users"-->
+                        <!--android:textSize="18sp" />-->
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginLeft="15sp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_marginRight="15sp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:background="@color/colorDrakGray" />-->
+
+                <!--language-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:src="@drawable/icon_language"
+                        android:id="@+id/icon_language"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:paddingLeft="15sp"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:paddingLeft="5sp"
+                        android:id="@+id/tv_user_language"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="Hindi"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/icon_edit_language"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:src="@drawable/icon_edit"
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:text="@string/fa_users"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15sp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorDrakGray" />
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="5sp"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_choose_keywords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:background="@drawable/button_keywords"
+                    android:text="Books that you may like it!" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

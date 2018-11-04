@@ -3,4 +3,6 @@
     <string name="hindi">Hindi</string>
     <string name="english">English</string>
     <string name="Lato_font">lato</string>
+    <string name="fa_users">&#xf0c0;</string>
+    <string name="books_that_you_like"><u>Books that you like!</u></string>
 </resources>

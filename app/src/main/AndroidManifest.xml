@@ -29,7 +29,6 @@
         <activity android:name=".SignInActivity" />
         <activity
             android:name=".UserHomeActivity"
-            android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

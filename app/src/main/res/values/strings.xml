@@ -5,4 +5,10 @@
     <string name="Lato_font">lato</string>
     <string name="fa_users">&#xf0c0;</string>
     <string name="books_that_you_like"><u>Books that you like!</u></string>
+    <string name="nav_header_desc">UserImage</string>
+    <string name="nav_header_title">Mohit</string>
+    <string name="nav_header_subtitle">abc@gmail.com</string>
+    <string name="action_settings">abc@gmail.com</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="navigation_drawer_open">open</string>
 </resources>

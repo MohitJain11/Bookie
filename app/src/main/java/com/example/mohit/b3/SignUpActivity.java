@@ -118,8 +118,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                         ")+";
 
-//                Intent signIn = new Intent(SignUpActivity.this, SignInActivity.class);
-//                startActivity(signIn);
+                Intent signIn = new Intent(SignUpActivity.this, UserHomeActivity.class);
+                startActivity(signIn);
 
                 if (TextUtils.isEmpty(input_name.getText().toString())) {
                     input_name.setError("Enter Name");
